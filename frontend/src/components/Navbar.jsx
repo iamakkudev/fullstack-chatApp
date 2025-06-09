@@ -1,9 +1,11 @@
-import React  from 'react'
+import React, { useState }  from 'react'
 import {Link} from 'react-router-dom'
 import {MessageSquare, User,Settings, LogOut} from 'lucide-react'
 import { useAuthStore } from '../store/useAuthStore'
 
 const Navbar = () => {
+  const [settingToggle, setSettingToggle] = useState(false)
+  const [userToggle, setUserToggle] = useState(false)
   const { logout, authUser} = useAuthStore()
   return <header
   className='bg-base-100 border-b border-base-300 fixed w-full top-0 z-40 backdrop:backdrop-blur-lg '
@@ -20,14 +22,14 @@ const Navbar = () => {
         </Link>
         </div>
         <div className="flex items-center gap-2">
-          <Link to={"/setting"} className={`btn btn-sm gap-2 transition-colors`}>
-            <Settings className='w-4 h-4' />
+          <Link to={settingToggle ? "/setting" : "/"} className={`btn btn-sm gap-2 transition-colors`} onClick={()=>setSettingToggle(!settingToggle)}>
+            <Settings className='size-5' />
             <span className='hidden sm:inline'>Setting</span>
           </Link>
           {
             authUser && (
               <>
-              <Link to={"/profile"} className={`btn btn-sm gap-2 `}>
+              <Link to={userToggle ? "/profile" : "/"} className={`btn btn-sm gap-2 `}  onClick={()=>setUserToggle(!userToggle)}>
               <User className='size-5' />
               <span className='hidden sm:inline'>Profile</span>
               </Link>
