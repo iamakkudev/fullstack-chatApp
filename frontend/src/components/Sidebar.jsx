@@ -47,7 +47,7 @@ const Sidebar = () => {
                     key={user._id}
                     onClick={() =>setSelectedUser(user)}
                     className={`
-                        w-full p-3 flex items-center gap-3
+                        w-full p-3 sm:flex items-center gap-3
                         hover:bg-base-300 transition-colors
                         ${selectedUser?._id === user._id ? "bg-base-300 ring-1 ring-base-300" : ""}
                         `}
@@ -65,7 +65,7 @@ const Sidebar = () => {
                     </div>
 
                     {/* user info - only visible on larger screen */}
-                    <div className='hidden lg:block text-left min-w-0'>
+                    <div className='lg:block text-center lg:text-left min-w-0'>
                         <div className="font-medium truncate"> {user.fullName}</div>
                         <div className="text-sm text-zinc-400">
                             {onlineUser.includes(user._id) ? "Online" : "Offline"}
