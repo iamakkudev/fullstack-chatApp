@@ -64,7 +64,6 @@ export const login = async (req,res)=>{
             fullName:user.fullName,
             email:user.email,
             profilePic: user.profilePic
-
         })
     } catch (error) {
         console.log("Error in login controller", error.message)
@@ -75,6 +74,7 @@ export const login = async (req,res)=>{
 export const logout = (req,res)=>{
     try {
         res.cookie("jwt","",{maxAge:0})
+
         res.status(200).json({message:"logout succesfully"})
     } catch (error) {
          console.log("Error in logout controller", error.message)
@@ -89,7 +89,9 @@ export const updateProfile = async (req,res) =>{
             return res.status(400).json({message: "Profile pic is required"})
         }
         const uploadResponse = await cloudinary.uploader.upload(profilePic);
-        const updatedUser = await User.findByIdAndUpdate(userId, {profilePic:uploadResponse.secure_url}, {new:true})
+        console.log(uploadResponse)
+        const updatedUser = await User.findByIdAndUpdate(userId, {profilePic:uploadResponse.secure_url}, {new:true}).select("-password")
+        console.log(updatedUser)
         res.status(200).json(updatedUser)
     } catch (error) {
          console.log("Error in updateProfile controller", error.message)

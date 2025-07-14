@@ -29,7 +29,7 @@ const SignUpPage = () => {
     e.preventDefault();
     const success = validateForm();
 
-    if (success === true) signup(formData);
+    if (success ) signup(formData);
   };
 
   return (
